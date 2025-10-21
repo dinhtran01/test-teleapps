@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HomePage } from './pages/HomePage';
-import { useTelegramApp } from './hooks/useTelegramApp';
+import { useEffect } from 'react';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
+import { useTelegramApp } from './hooks/useTelegramApp';
+import { HomePage } from './pages/HomePage';
 
 function App() {
   const { theme, isReady } = useTelegramApp();
