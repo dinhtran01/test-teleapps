@@ -92,7 +92,6 @@ export const useTelegramApp = () => {
       console.error('Lỗi khi gửi dữ liệu:', error);
     }
   };
-
   // Hàm đóng Web App
   const close = () => {
     try {
@@ -118,7 +117,7 @@ export const useTelegramApp = () => {
       WebApp.showAlert(message);
     } catch (error) {
       console.error('Lỗi khi hiển thị thông báo:', error);
-      alert(message);
+      // Không gọi alert(message) ở đây để tránh popup trùng lặp
     }
   };
 
@@ -133,6 +132,72 @@ export const useTelegramApp = () => {
     }
   };
 
+  // Các phương thức quản lý Main Button
+  const showMainButton = (text: string, onClick: () => void) => {
+    try {
+      WebApp.MainButton.setText(text);
+      WebApp.MainButton.onClick(onClick);
+      WebApp.MainButton.show();
+    } catch (error) {
+      console.error('Lỗi khi hiển thị Main Button:', error);
+    }
+  };
+
+  const hideMainButton = () => {
+    try {
+      WebApp.MainButton.hide();
+    } catch (error) {
+      console.error('Lỗi khi ẩn Main Button:', error);
+    }
+  };
+
+  const setMainButtonText = (text: string) => {
+    try {
+      WebApp.MainButton.setText(text);
+    } catch (error) {
+      console.error('Lỗi khi đặt text cho Main Button:', error);
+    }
+  };
+
+  const setMainButtonColor = (color: string) => {
+    try {
+      WebApp.MainButton.setColor(color as `#${string}`);
+    } catch (error) {
+      console.error('Lỗi khi đặt màu cho Main Button:', error);
+    }
+  };
+
+  const setMainButtonProgress = (isProgress: boolean) => {
+    try {
+      if (isProgress) {
+        WebApp.MainButton.showProgress();
+      } else {
+        WebApp.MainButton.hideProgress();
+      }
+    } catch (error) {
+      console.error('Lỗi khi đặt trạng thái progress cho Main Button:', error);
+    }
+  };
+
+  // Các phương thức quản lý Back Button
+  const showBackButton = (onClick: () => void) => {
+    try {
+      WebApp.BackButton.onClick(onClick);
+      WebApp.BackButton.show();
+    } catch (error) {
+      
+      console.error('Lỗi khi hiển thị Back Button:', error);
+    }
+  };
+
+  const hideBackButton = () => {
+    try {
+      WebApp.BackButton.hide();
+    } catch (error) {
+      console.error('Lỗi khi ẩn Back Button:', error);
+    }
+  };
+
   return {
     user,
     theme,
@@ -143,5 +208,14 @@ export const useTelegramApp = () => {
     showAlert,
     showConfirm,
     webApp: WebApp,
+    // Thêm các phương thức Main Button
+    showMainButton,
+    hideMainButton,
+    setMainButtonText,
+    setMainButtonColor,
+    setMainButtonProgress,
+    // Thêm các phương thức Back Button
+    showBackButton,
+    hideBackButton
   };
 };
